@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAnsTCH8Xvdyms9JHiH5zrDHWsITLDM9lM",
+            authDomain: "ned-bot.firebaseapp.com",
+            databaseURL: "https://ned-bot.firebaseio.com",
+            projectId: "ned-bot",
+            storageBucket: "ned-bot.appspot.com",
+            messagingSenderId: "406889320506"
+        };
+        firebase.initializeApp(config);
+        const auth = firebase.auth();
+    </script>
+</head>
+
+<body>
+    <h1>Notify Me App | A handsOn to FCM </h1>
+    <button id="signInwithGoogle">Sing in with google</button>
+</body>
+
+<script>
+   
+    const signInwithGoogle = document.getElementById('signInwithGoogle');
+
+    const singInUsingGoogle = () => {
+        auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    }
+
+    signInwithGoogle.addEventListener('click', singInUsingGoogle);
+ 
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            console.log("loggedIn");
+            window.location.href = "./dashboard.html"
+            
+        } else {
+            console.log("not loggedIn");
+        }
+    });
+
+
+</script>
+
+</html>
